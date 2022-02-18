@@ -22,7 +22,9 @@ app.post('/api/courses', (req, res) => {
 
     const { error } = validate(req.body);
 
-    if (error) return res.status(400).send(result.error.details[0].message);
+    if (error) {
+        return res.status(400).send(result.error.details[0].message);
+    }
     const course = {
         id: courses.length + 1,
         name: req.body.name
@@ -34,7 +36,9 @@ app.put('/api/courses/:id', (req, res) => {
 
     let course = courses.find(c => c.id === parseInt(req.params.id));
     const { error } = validate(req.body);
-    if (error) return res.status(400).send(result.error.details[0].message);
+    if (error) {
+        return res.status(400).send(result.error.details[0].message);
+    }
     course.name = req.body.name;
     res.send(course);
 });
